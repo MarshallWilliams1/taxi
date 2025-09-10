@@ -15,25 +15,25 @@ CI/CD: GitHub Actions
 
 Core AWS Services:
 
-Storage: S3 (Data Lake)
+- Storage: S3 (Data Lake)
 
-Compute: Fargate on ECS (Serverless Container Orchestration)
+- Compute: Fargate on ECS (Serverless Container Orchestration)
 
-Analytics: Athena (Serverless SQL Query Engine)
+- Analytics: Athena (Serverless SQL Query Engine)
 
-Container Registry: ECR
+- Container Registry: ECR
 
-Permissions: IAM
+- Permissions: IAM
 
 Programming & Data Science:
 
-Language: Python
+- Language: Python
 
-ETL & Manipulation: Pandas
+- ETL & Manipulation: Pandas
 
-Machine Learning: Scikit-learn
+- Machine Learning: Scikit-learn
 
-Cloud SDK: Boto3
+- Cloud SDK: Boto3
 
 Dashboarding: Jupyter Notebook, Matplotlib, Seaborn
 
