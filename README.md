@@ -1,7 +1,7 @@
-NYC Taxi Data Analytics & Prediction Platform
+# NYC Taxi Data Analytics & Prediction Platform
 This project implements a complete, end-to-end serverless data platform on AWS to ingest, process, and analyze NYC Taxi trip data. It features an automated Infrastructure as Code (IaC) deployment, a containerized ETL pipeline, and a local data visualization dashboard.
 
-Project Architecture
+## Project Architecture
 The architecture consists of the following components:
 
 Data Lake (S3): Two S3 buckets store the raw and processed taxi data in Parquet format.
