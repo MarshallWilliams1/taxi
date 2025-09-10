@@ -63,8 +63,8 @@ Python 3.9+ and pip installed.
 
 Clone the repository:
 
-git clone [https://github.com/YOUR_USERNAME/nyc-taxi-platform.git](https://github.com/YOUR_USERNAME/nyc-taxi-platform.git)
-cd nyc-taxi-platform
+git clone [https://github.com/YOUR_USERNAME/nyc-taxi-platform.git](https://github.com/MarshallWilliams1/taxi.git)
+cd taxi
 
 Deploy the AWS Infrastructure:
 
