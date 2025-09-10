@@ -1,66 +1,118 @@
 # NYC Taxi Data Analytics & Prediction Platform
-This project implements a complete, end-to-end serverless data platform on AWS to ingest, process, and analyze NYC Taxi trip data. It features an automated Infrastructure as Code (IaC) deployment, a containerized ETL pipeline, and a local data visualization dashboard.
+An end-to-end serverless data platform on AWS for processing, analyzing, and predicting NYC taxi trip data.
 
-## Project Architecture
-The architecture consists of the following components:
+## Description
+This project demonstrates a complete, professional data engineering and machine learning workflow on the cloud. It ingests millions of NYC taxi trip records, processes them in a serverless environment, and makes the data available for analytics. The platform culminates in the development of a machine learning model to predict trip durations and an interactive dashboard for visualizing key business metrics. This project was built to showcase a modern, scalable, and automated data architecture using Infrastructure as Code (IaC) and CI/CD principles.
 
-Data Lake (S3): Two S3 buckets store the raw and processed taxi data in Parquet format.
-
-ETL (Fargate): A Python script, containerized with Docker, runs on AWS Fargate to clean the data, perform feature engineering, and write the processed results back to S3.
-
-Data Catalog (Glue): An AWS Glue crawler (implicitly used by Athena) catalogs the schema of the processed data.
-
-Querying (Athena): Amazon Athena provides a serverless SQL interface to query the processed data directly in S3.
-
-Automation (Terraform & GitHub Actions): The entire cloud infrastructure is defined with Terraform. A GitHub Actions CI/CD pipeline automates the deployment of infrastructure and the building/publishing of the ETL container.
-
-Visualization (Jupyter): A local Jupyter Notebook connects to Athena to run SQL queries and visualizes the results using Python libraries like Matplotlib and Seaborn.
-
-Technology Stack
+## Tech Stack
 Cloud Provider: AWS
 
 Infrastructure as Code: Terraform
 
-Data Storage: AWS S3
-
-ETL/Containerization: Python (Pandas), Docker, AWS Fargate
+Containerization: Docker
 
 CI/CD: GitHub Actions
 
-Data Querying: AWS Athena
+Core AWS Services:
 
-Data Visualization: Python (Jupyter, Matplotlib, Seaborn)
+Storage: S3 (Data Lake)
 
-Project Phases
-[x] Phase 1: Infrastructure & Ingestion: Deployed foundational AWS resources with Terraform and ingested the first month of raw data.
+Compute: Fargate on ECS (Serverless Container Orchestration)
 
-[x] Phase 2: ETL Containerization: Built a Docker container for the Python processing script and tested it locally.
+Analytics: Athena (Serverless SQL Query Engine)
 
-[x] Phase 3: CI/CD Automation: Created a GitHub Actions workflow to automate infrastructure and container deployment.
+Container Registry: ECR
 
-[x] Phase 4: Data Analysis: Ran exploratory SQL queries against the processed data using AWS Athena.
+Permissions: IAM
 
-[ ] Phase 5: Visualization: Use a local Jupyter Notebook to run Athena queries and create visualizations.
+Programming & Data Science:
 
-How to Run Locally
-Prerequisites: Ensure you have Terraform, Docker, Python 3.9+, and the AWS CLI installed and configured.
+Language: Python
 
-Deploy Infrastructure:
+ETL & Manipulation: Pandas
+
+Machine Learning: Scikit-learn
+
+Cloud SDK: Boto3
+
+Dashboarding: Jupyter Notebook, Matplotlib, Seaborn
+
+## Features
+Automated Infrastructure: The entire cloud infrastructure is defined as code using Terraform, allowing for repeatable and version-controlled deployments.
+
+Serverless ETL Pipeline: A containerized Python script running on AWS Fargate performs the ETL process, transforming raw Parquet files into a clean, analytics-ready format.
+
+CI/CD Automation: A GitHub Actions workflow automatically deploys infrastructure changes and publishes new container images on every push to the main branch.
+
+Interactive Data Analysis: An interactive Jupyter Notebook connects directly to AWS Athena to perform exploratory data analysis using standard SQL.
+
+Predictive Modeling: A linear regression model is developed with Scikit-learn to predict taxi trip durations based on features like distance, fare, and passenger count. The project also demonstrates how to prepare this model for scalable training with Amazon SageMaker.
+
+Setup & Local Execution
+To clone and run this project locally, you will need the following prerequisites:
+
+An AWS Account with credentials configured locally.
+
+Terraform installed.
+
+Docker Desktop installed and running.
+
+Python 3.9+ and pip installed.
+
+## Instructions:
+
+Clone the repository:
+
+git clone [https://github.com/YOUR_USERNAME/nyc-taxi-platform.git](https://github.com/YOUR_USERNAME/nyc-taxi-platform.git)
+cd nyc-taxi-platform
+
+Deploy the AWS Infrastructure:
 
 cd terraform
 terraform init
-terraform apply
+terraform apply -auto-approve
+cd ..
 
-Run ETL Locally (Optional):
+Run the ETL and Analysis Notebook:
 
-# From project root
-docker build -t nyc-taxi-etl .
-docker run --rm -v ~/.aws:/root/.aws:ro -v $(pwd)/terraform:/app/terraform:ro nyc-taxi-etl
+Install Python dependencies:
 
-Run Visualization Notebook:
+pip install -r requirements.txt
 
-# From project root
-pip install jupyterlab pandas boto3 matplotlib seaborn
+Start the Jupyter server:
+
 jupyter lab
 
-Then, open the analysis.ipynb notebook and run the cells.
+Open analysis.ipynb in your browser and run all cells.
+
+## Screenshots & Demos
+Rider Demand Hotspots
+This chart shows the top 20 taxi pickup locations in NYC, providing clear insights into areas with the highest demand.
+
+<img width="1064" height="747" alt="image" src="https://github.com/user-attachments/assets/07759b48-129b-4af0-bf6c-55fbe483f939" />
+
+
+Fare & Trip Duration Analysis
+These charts break down the most common fare brackets and show how average trip duration changes throughout the day, highlighting the impact of rush hour.
+
+<img width="908" height="599" alt="image" src="https://github.com/user-attachments/assets/820e6862-3945-4155-985b-74bab27d4ae0" />
+
+Machine Learning Prediction
+The trained Scikit-learn model in action, predicting the duration for a new, hypothetical trip.
+
+<img width="461" height="118" alt="image" src="https://github.com/user-attachments/assets/a234deb7-477f-4c3b-94b8-5c1ee0f15da4" />
+
+
+More Images
+
+<img width="1056" height="599" alt="image" src="https://github.com/user-attachments/assets/b112fc31-9674-43a4-89bb-9b3857eef7b3" />
+
+<img width="655" height="707" alt="image" src="https://github.com/user-attachments/assets/98bdf3ef-fb96-4c8a-afe1-d17ccf31c9c8" />
+
+<img width="565" height="476" alt="image" src="https://github.com/user-attachments/assets/448e3c19-9aa2-4f9e-be1f-f42a387d03da" />
+
+
+## Future Work
+Deploy Model to SageMaker Endpoint: Take the trained Scikit-learn model and deploy it to a real-time SageMaker Endpoint. This would provide a REST API for applications to get live trip duration predictions.
+
+Automate Fargate Job Trigger: Implement an S3 event trigger with AWS Lambda. When a new raw data file is uploaded, the Lambda function would automatically start the Fargate ETL task, making the entire pipeline event-driven.
